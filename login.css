@@ -1,0 +1,85 @@
+/* CSS SOLO - SEM ALTERAR O HTML 
+*/
+
+/* 1. Reset e Centralização Total */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+    background: #121214; /* Fundo escuro */
+    color: #ffffff;
+    
+    /* Centraliza tudo na tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 2. Estilizando o Título */
+h1 {
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #00b37e; /* Verde estilo Matrix/Tech */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* 3. Estilizando os Inputs (E-mail e Senha) */
+input {
+    width: 320px;
+    padding: 15px;
+    background: #202024;
+    border: 2px solid #29292e;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: #00b37e;
+}
+
+/* 4. Arrumando as Labels (as palavras que estavam fugindo) */
+label {
+    width: 320px; /* Mesma largura do input para alinhar */
+    text-align: left;
+    font-size: 0.85rem;
+    color: #a8a8b3;
+    margin-top: 5px;
+    margin-bottom: 20px; /* Espaço para o próximo campo */
+    order: 0; /* Mantém a ordem original do seu HTML */
+}
+
+/* 5. Estilizando o Botão */
+button {
+    width: 320px;
+    padding: 16px;
+    background-color: #00875f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #00b37e;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* 6. Matando os <br> que atrapalham o layout flex */
+br {
+    display: none;
+}
