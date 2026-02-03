@@ -1,22 +1,1040 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cadastro-barber.css">
-    <title>Document</title>
+    <title>Cadastro de Barbearia - Plataforma de Agendamentos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-primary: #2563EB;
+            --gray-dark: #1F2937;
+            --gray-medium: #9CA3AF;
+            --gray-light: #F3F4F6;
+            --white: #FFFFFF;
+            --blue-hover: #1D4ED8;
+            --blue-light: #DBEAFE;
+            --red-error: #EF4444;
+            --green-success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--gray-light);
+            color: var(--gray-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--blue-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--gray-medium);
+            font-size: 1rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.6s ease-out 0.1s backwards;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gray-light);
+            z-index: 0;
+        }
+
+        .progress-line-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--blue-primary);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 3px;
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: 600;
+            color: var(--gray-medium);
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-circle {
+            background: var(--blue-primary);
+            border-color: var(--blue-primary);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .step.completed .step-circle {
+            background: var(--green-success);
+            border-color: var(--green-success);
+            color: var(--white);
+        }
+
+        .step-label {
+            font-size: 0.875rem;
+            color: var(--gray-medium);
+            font-weight: 500;
+        }
+
+        .step.active .step-label {
+            color: var(--blue-primary);
+            font-weight: 600;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--gray-medium);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--gray-dark);
+            font-size: 0.9rem;
+        }
+
+        label .required {
+            color: var(--red-error);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s ease;
+            background: var(--white);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--blue-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--gray-medium);
+        }
+
+        input.error, select.error {
+            border-color: var(--red-error);
+        }
+
+        .error-message {
+            color: var(--red-error);
+            font-size: 0.825rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Dynamic Lists */
+        .dynamic-list {
+            margin-top: 1.5rem;
+        }
+
+        .list-item {
+            background: var(--gray-light);
+            padding: 1.25rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            position: relative;
+            animation: slideInList 0.3s ease-out;
+        }
+
+        .list-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .list-item-title {
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: var(--red-error);
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.25rem 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .remove-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .add-btn {
+            background: var(--blue-light);
+            color: var(--blue-primary);
+            border: 2px dashed var(--blue-primary);
+            padding: 0.875rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            width: 100%;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-btn:hover {
+            background: var(--blue-primary);
+            color: var(--white);
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.125rem;
+            cursor: pointer;
+            accent-color: var(--blue-primary);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .checkbox-group a {
+            color: var(--blue-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        /* Buttons */
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--blue-primary);
+            color: var(--white);
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--blue-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--gray-dark);
+            border: 2px solid #E5E7EB;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-light);
+        }
+
+        .btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        /* Success Message */
+        .success-container {
+            text-align: center;
+            padding: 3rem 2rem;
+            display: none;
+        }
+
+        .success-container.show {
+            display: block;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--green-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--white);
+            stroke-width: 3;
+        }
+
+        .success-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message {
+            color: var(--gray-medium);
+            margin-bottom: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInList {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .progress-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .step-label {
+                font-size: 0.75rem;
+            }
+
+            .step-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 0.875rem;
+            }
+
+            .form-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .step-label {
+                display: none;
+            }
+
+            .progress-steps {
+                justify-content: space-around;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Cadastre sua Barbearia</h1>
+    <div class="container">
+        <div class="header">
+            <div class="logo">✂️ AppBarber</div>
+            <h1>Cadastre sua Barbearia</h1>
+            <p>Gerencie agendamentos e expanda seu negócio</p>
+        </div>
 
-    <label for="nome">Digite o nome da sua barbearia</label>
-    <input type="text" id="Barbearia" name="nome barbearia">
-    <label for="CNPJ">Digite o CNPJ de sua barbearia</label>
-    <input type="number" id="CNPJ" name="CNPJ">
-    <label for="atendimento">Coloque os dias e horarios que você ira atender</label>
-    <input type="text" id="atendimento" name="horarios">
-    <label for="nome">Coloque o nome de todos os barbeiros separado com vírgula</label>
-    <input type="text" id="barbeiros" name="nome barbeiros">
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-line">
+                    <div class="progress-line-fill" id="progressFill"></div>
+                </div>
+                <div class="step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Dados da Barbearia</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Equipe</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Serviços</div>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Conta</div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Form Card -->
+        <div class="form-card">
+            <form id="cadastroForm">
+                <!-- Etapa 1: Dados da Barbearia -->
+                <div class="form-section active" data-section="1">
+                    <h2 class="section-title">Dados da Barbearia</h2>
+                    <p class="section-subtitle">Informações comerciais do estabelecimento</p>
+
+                    <div class="form-group">
+                        <label for="cnpj">CNPJ <span class="required">*</span></label>
+                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
+                        <div class="error-message" id="cnpjError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nomeBarbearia">Nome da Barbearia <span class="required">*</span></label>
+                        <input type="text" id="nomeBarbearia" name="nomeBarbearia" placeholder="Ex: Barbearia Clássica" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefone">Telefone Comercial <span class="required">*</span></label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailComercial">Email Comercial <span class="required">*</span></label>
+                            <input type="email" id="emailComercial" name="emailComercial" placeholder="contato@barbearia.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rua">Endereço Completo <span class="required">*</span></label>
+                        <input type="text" id="rua" name="rua" placeholder="Rua, avenida..." required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="numero">Número <span class="required">*</span></label>
+                            <input type="text" id="numero" name="numero" placeholder="123" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bairro">Bairro <span class="required">*</span></label>
+                            <input type="text" id="bairro" name="bairro" placeholder="Centro" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cidade">Cidade <span class="required">*</span></label>
+                            <input type="text" id="cidade" name="cidade" placeholder="São Paulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado <span class="required">*</span></label>
+                            <select id="estado" name="estado" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                            Próximo
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Etapa 2: Equipe -->
+                <div class="form-section" data-section="2">
+                    <h2 class="section-title">Equipe de Barbeiros</h2>
+                    <p class="section-subtitle">Adicione os profissionais que trabalham no estabelecimento</p>
+
+                    <div class="form-group">
+                        <label for="quantidadeBarbeiros">Quantidade de Barbeiros <span class="required">*</span></label>
+                        <input type="number" id="quantidadeBarbeiros" name="quantidadeBarbeiros" min="1" placeholder="Ex: 3" required>
+                    </div>
+
+                    <div class="dynamic-list" id="barbeirosList">
+                        <!-- Barbeiros serão adicionados aqui dinamicamente -->
+                    </div>
+
+                    <button type="button" class="add-btn" onclick="addBarbeiro()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Adicionar Barbeiro
+                    </button>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Voltar
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                            Próximo
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Etapa 3: Serviços -->
+                <div class="form-section" data-section="3">
+                    <h2 class="section-title">Serviços Oferecidos</h2>
+                    <p class="section-subtitle">Cadastre os serviços disponíveis na barbearia</p>
+
+                    <div class="dynamic-list" id="servicosList">
+                        <!-- Serviços iniciais -->
+                    </div>
+
+                    <button type="button" class="add-btn" onclick="addServico()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Adicionar Serviço
+                    </button>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Voltar
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                            Próximo
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Etapa 4: Dados da Conta -->
+                <div class="form-section" data-section="4">
+                    <h2 class="section-title">Dados da Conta</h2>
+                    <p class="section-subtitle">Crie suas credenciais de acesso à plataforma</p>
+
+                    <div class="form-group">
+                        <label for="emailAcesso">Email de Acesso <span class="required">*</span></label>
+                        <input type="email" id="emailAcesso" name="emailAcesso" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha">Senha <span class="required">*</span></label>
+                        <input type="password" id="senha" name="senha" placeholder="Mínimo 8 caracteres" required minlength="8">
+                        <div class="error-message" id="senhaError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmarSenha">Confirmar Senha <span class="required">*</span></label>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Repita a senha" required>
+                        <div class="error-message" id="confirmarSenhaError"></div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termos" name="termos" required>
+                        <label for="termos">
+                            Aceito os <a href="#" target="_blank">Termos de Uso</a> e a 
+                            <a href="#" target="_blank">Política de Privacidade</a>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            Criar Conta da Barbearia
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <div class="success-container" id="successContainer">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2 class="success-title">Cadastro Concluído!</h2>
+                    <p class="success-message">Sua barbearia foi cadastrada com sucesso. Em breve você receberá um email de confirmação.</p>
+                    <button type="button" class="btn btn-primary" onclick="window.location.reload()">
+                        Fazer Novo Cadastro
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+        let barbeiroCount = 0;
+        let servicoCount = 0;
+
+        // Máscaras de input
+        document.getElementById('cnpj').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+            value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+            value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+            value = value.replace(/(\d{4})(\d)/, '$1-$2');
+            e.target.value = value;
+        });
+
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/^(\d{2})(\d)/, '($1) $2');
+            value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            e.target.value = value;
+        });
+
+        // Navegação entre etapas
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < totalSteps) {
+                    document.querySelector(`[data-section="${currentStep}"]`).classList.remove('active');
+                    document.querySelector(`[data-step="${currentStep}"]`).classList.add('completed');
+                    document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                    
+                    currentStep++;
+                    
+                    document.querySelector(`[data-section="${currentStep}"]`).classList.add('active');
+                    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+                    
+                    updateProgress();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                document.querySelector(`[data-section="${currentStep}"]`).classList.remove('active');
+                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                
+                currentStep--;
+                
+                document.querySelector(`[data-section="${currentStep}"]`).classList.add('active');
+                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('completed');
+                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+                
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function validateCurrentStep() {
+            const currentSection = document.querySelector(`[data-section="${currentStep}"]`);
+            const inputs = currentSection.querySelectorAll('input[required], select[required]');
+            let valid = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    valid = false;
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            // Validação específica de senha
+            if (currentStep === 4) {
+                const senha = document.getElementById('senha').value;
+                const confirmarSenha = document.getElementById('confirmarSenha').value;
+                
+                if (senha !== confirmarSenha) {
+                    document.getElementById('confirmarSenhaError').textContent = 'As senhas não coincidem';
+                    document.getElementById('confirmarSenhaError').classList.add('show');
+                    document.getElementById('confirmarSenha').classList.add('error');
+                    valid = false;
+                } else {
+                    document.getElementById('confirmarSenhaError').classList.remove('show');
+                    document.getElementById('confirmarSenha').classList.remove('error');
+                }
+
+                if (!document.getElementById('termos').checked) {
+                    valid = false;
+                    alert('Você precisa aceitar os termos de uso');
+                }
+            }
+
+            return valid;
+        }
+
+        // Adicionar barbeiro
+        function addBarbeiro() {
+            barbeiroCount++;
+            const barbeirosList = document.getElementById('barbeirosList');
+            const barbeiroItem = document.createElement('div');
+            barbeiroItem.className = 'list-item';
+            barbeiroItem.innerHTML = `
+                <div class="list-item-header">
+                    <span class="list-item-title">Barbeiro ${barbeiroCount}</span>
+                    <button type="button" class="remove-btn" onclick="removeBarbeiro(this)">✕</button>
+                </div>
+                <div class="form-group">
+                    <label>Nome do Barbeiro <span class="required">*</span></label>
+                    <input type="text" name="barbeiro_nome[]" placeholder="Nome completo" required>
+                </div>
+                <div class="form-group">
+                    <label>Especialidade (opcional)</label>
+                    <input type="text" name="barbeiro_especialidade[]" placeholder="Ex: Cortes clássicos, Barba">
+                </div>
+            `;
+            barbeirosList.appendChild(barbeiroItem);
+        }
+
+        function removeBarbeiro(btn) {
+            btn.closest('.list-item').remove();
+        }
+
+        // Adicionar serviço
+        function addServico() {
+            servicoCount++;
+            const servicosList = document.getElementById('servicosList');
+            const servicoItem = document.createElement('div');
+            servicoItem.className = 'list-item';
+            servicoItem.innerHTML = `
+                <div class="list-item-header">
+                    <span class="list-item-title">Serviço ${servicoCount}</span>
+                    <button type="button" class="remove-btn" onclick="removeServico(this)">✕</button>
+                </div>
+                <div class="form-group">
+                    <label>Nome do Serviço <span class="required">*</span></label>
+                    <input type="text" name="servico_nome[]" placeholder="Ex: Corte Masculino" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Preço (R$) <span class="required">*</span></label>
+                        <input type="text" name="servico_preco[]" placeholder="00,00" required class="money-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Duração (minutos) <span class="required">*</span></label>
+                        <input type="number" name="servico_duracao[]" placeholder="30" min="1" required>
+                    </div>
+                </div>
+            `;
+            servicosList.appendChild(servicoItem);
+
+            // Adiciona máscara de dinheiro aos novos inputs
+            const moneyInputs = servicoItem.querySelectorAll('.money-input');
+            moneyInputs.forEach(input => {
+                input.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    value = (value / 100).toFixed(2) + '';
+                    value = value.replace('.', ',');
+                    value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+                    e.target.value = value;
+                });
+            });
+        }
+
+        function removeServico(btn) {
+            btn.closest('.list-item').remove();
+        }
+
+        // Adicionar serviço inicial
+        window.addEventListener('DOMContentLoaded', function() {
+            addServico();
+        });
+
+        // Submit do formulário
+        document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateCurrentStep()) {
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.classList.add('loading');
+                submitBtn.innerHTML = '<div class="spinner"></div> Criando conta...';
+                submitBtn.disabled = true;
+
+                // Simular envio (aqui você faria a requisição real para o backend)
+                setTimeout(() => {
+                    document.querySelector('[data-section="4"]').style.display = 'none';
+                    document.getElementById('successContainer').classList.add('show');
+                }, 2000);
+            }
+        });
+
+        // Remover erro ao digitar
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+            });
+        });
+    </script>
 </body>
 </html>
