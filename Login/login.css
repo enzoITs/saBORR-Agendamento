@@ -1,85 +1,130 @@
-/* CSS SOLO - SEM ALTERAR O HTML 
-*/
 
-/* 1. Reset e Centralização Total */
-body {
+/* login.css */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-    background: #121214; /* Fundo escuro */
-    color: #ffffff;
-    
-    /* Centraliza tudo na tela */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #2563EB 0%, #1F2937 100%);
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    padding: 20px;
 }
 
-/* 2. Estilizando o Título */
+.login-container {
+    background: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2563EB, #1F2937);
+}
+
 h1 {
+    text-align: center;
+    color: #1F2937;
+    font-size: 2rem;
+    font-weight: 700;
     margin-bottom: 2rem;
-    font-size: 2.5rem;
-    color: #00b37e; /* Verde estilo Matrix/Tech */
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: -0.025em;
 }
 
-/* 3. Estilizando os Inputs (E-mail e Senha) */
-input {
-    width: 320px;
-    padding: 15px;
-    background: #202024;
-    border: 2px solid #29292e;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s;
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
 }
 
-input:focus {
-    border-color: #00b37e;
-}
-
-/* 4. Arrumando as Labels (as palavras que estavam fugindo) */
-label {
-    width: 320px; /* Mesma largura do input para alinhar */
-    text-align: left;
-    font-size: 0.85rem;
-    color: #a8a8b3;
-    margin-top: 5px;
-    margin-bottom: 20px; /* Espaço para o próximo campo */
-    order: 0; /* Mantém a ordem original do seu HTML */
-}
-
-/* 5. Estilizando o Botão */
-button {
-    width: 320px;
-    padding: 16px;
-    background-color: #00875f;
-    color: #fff;
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 1rem 1rem 1rem 0;
     border: none;
-    border-radius: 8px;
-    font-weight: bold;
+    border-bottom: 2px solid #F3F4F6;
+    background: transparent;
+    font-size: 1rem;
+    color: #1F2937;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-bottom-color: #2563EB;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+input::placeholder {
+    color: #9CA3AF;
+}
+
+label {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    color: #9CA3AF;
+    font-size: 0.95rem;
+    font-weight: 500;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: -0.5rem;
+    left: 0;
+    font-size: 0.75rem;
+    color: #2563EB;
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #2563EB 0%, #1F2937 100%);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
     font-size: 1.1rem;
-    text-transform: uppercase;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    margin-top: 10px;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 button:hover {
-    background-color: #00b37e;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: translateY(0);
 }
 
-/* 6. Matando os <br> que atrapalham o layout flex */
-br {
-    display: none;
+@media (max-width: 480px) {
+    .login-container {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
 }
