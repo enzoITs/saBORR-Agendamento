@@ -1,130 +1,186 @@
+/* ========================================
+   LOGIN BARBEARIA - MESMO CSS DO CADASTRO
+   ======================================== */
 
-/* login.css */
-* {
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #2563EB 0%, #1F2937 100%);
+  }
+  
+  :root {
+    --azul-principal: #2563EB;
+    --cinza-escuro: #1F2937;
+    --cinza-medio: #9CA3AF;
+    --cinza-claro: #F3F4F6;
+    --branco: #FFFFFF;
+    --azul-hover: #1D4ED8;
+    --dourado: #D4AF37;
+    --sombra-card: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+  
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--azul-principal) 0%, #1e3a8a 50%, #0f172a 100%);
     min-height: 100vh;
+    padding: 40px 20px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 20px;
-}
-
-.login-container {
-    background: #FFFFFF;
-    padding: 2.5rem;
-    border-radius: 16px;
-    box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25);
+    align-items: center;
+  }
+  
+  /* Container principal */
+  .main-container {
+    max-width: 420px;
     width: 100%;
-    max-width: 400px;
+    display: block;
+  }
+  
+  /* Título */
+  h1 {
+    color: var(--branco);
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    position: relative;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  h1:hover {
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+  }
+  
+  /* Formulário */
+  form {
+    background: var(--branco);
+    padding: 45px 35px;
+    border-radius: 20px;
+    box-shadow: var(--sombra-card);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
-}
-
-.login-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #2563EB, #1F2937);
-}
-
-h1 {
-    text-align: center;
-    color: #1F2937;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    letter-spacing: -0.025em;
-}
-
-.form-group {
-    position: relative;
-    margin-bottom: 1.5rem;
-}
-
-input[type="email"],
-input[type="password"] {
+  }
+  
+  form:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 70px rgba(37, 99, 235, 0.25);
+  }
+  
+  /* Labels (posicionados DEBAIXO dos inputs como no seu HTML) */
+  label {
+    display: block;
+    color: var(--cinza-escuro);
+    font-weight: 600;
+    margin: 8px 0 20px 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+  }
+  
+  label:hover {
+    color: var(--azul-principal);
+  }
+  
+  /* Remove os <br> */
+  br {
+    display: none;
+  }
+  
+  /* Inputs (GRUPOS JUNTOS como no seu HTML) */
+  input {
     width: 100%;
-    padding: 1rem 1rem 1rem 0;
-    border: none;
-    border-bottom: 2px solid #F3F4F6;
-    background: transparent;
+    padding: 18px 20px;
+    border: 2px solid var(--cinza-claro);
+    border-radius: 12px;
     font-size: 1rem;
-    color: #1F2937;
+    color: var(--cinza-escuro);
+    background: var(--branco);
+    margin-bottom: 5px; /* Pouco espaço antes do label */
     transition: all 0.3s ease;
-    outline: none;
-}
-
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-bottom-color: #2563EB;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
-}
-
-input::placeholder {
-    color: #9CA3AF;
-}
-
-label {
-    position: absolute;
-    top: 1rem;
-    left: 0;
-    color: #9CA3AF;
-    font-size: 0.95rem;
+    font-family: inherit;
     font-weight: 500;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-input:focus + label,
-input:not(:placeholder-shown) + label {
-    top: -0.5rem;
-    left: 0;
-    font-size: 0.75rem;
-    color: #2563EB;
-}
-
-button {
+  }
+  
+  input::placeholder {
+    color: var(--cinza-medio);
+    font-weight: 400;
+  }
+  
+  input:hover {
+    border-color: var(--azul-principal);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: var(--azul-principal);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  /* Botão */
+  button {
     width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #2563EB 0%, #1F2937 100%);
-    color: #FFFFFF;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--azul-principal), var(--azul-hover));
+    color: var(--branco);
     border: none;
     border-radius: 12px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
+    transition: all 0.4s ease;
+    margin-top: 30px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-button:hover {
-    transform: translateY(-2px);
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  button:hover {
+    transform: translateY(-4px);
     box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-@media (max-width: 480px) {
-    .login-container {
-        padding: 2rem 1.5rem;
-        margin: 1rem;
+    background: linear-gradient(135deg, var(--dourado), #E8C547);
+  }
+  
+  button:active {
+    transform: translateY(-2px);
+  }
+  
+  /* Link */
+  a {
+    display: block;
+    text-decoration: none;
+    margin-top: 20px;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 480px) {
+    body {
+      padding: 20px 15px;
     }
     
     h1 {
-        font-size: 1.75rem;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
     }
-}
+    
+    form {
+      padding: 35px 25px;
+    }
+    
+    input {
+      padding: 16px 18px;
+      font-size: 16px;
+    }
+  }
+  
