@@ -7,15 +7,26 @@
     <title>Pagina de Cadastro</title>
 </head>
 <body>
-    <h1>Cadastro</h1>
-    <label for="email">Email</label> <br>
-    <input type="text" id="email" placeholder="Digite seu email..."> <br>
-    <label for="cpf">CPF</label> <br>
-    <input type="number" id="cpf" placeholder="Digite seu CPF..."> <br>
-    <label for="senha">Senha</label> <br>
-    <input type="password" id="senha" placeholder="Digite sua senha..."> <br>
-    <label for="senha2">Confirmar senha</label> <br>
-    <input type="password" id="senha2" placeholder="Digite sua senha novamente..."> <br>
-    <a href="login.html"><button type="submit">Cadastrar-se</button></a>
+    <!-- SÓ ADICIONE ESTA DIV -->
+    <div class="main-container">
+        <h1>Cadastro</h1>
+        <form>
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="Digite seu email...">
+            
+            <label for="cpf">CPF</label>
+            <input type="number" id="cpf" placeholder="Digite seu CPF...">
+            
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" placeholder="Digite sua senha...">
+            
+            <label for="senha2">Confirmar senha</label>
+            <input type="password" id="senha2" placeholder="Digite sua senha novamente...">
+            
+            <a href="login.html">
+                <button type="submit">Cadastrar-se</button>
+            </a>
+        </form>
+    </div>
 </body>
 </html>
