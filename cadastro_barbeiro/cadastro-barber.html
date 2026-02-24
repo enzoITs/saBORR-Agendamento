@@ -41,7 +41,6 @@
             padding: 2rem 1rem;
         }
 
-        /* Header */
         .header {
             text-align: center;
             margin-bottom: 3rem;
@@ -70,7 +69,6 @@
             font-size: 1rem;
         }
 
-        /* Progress Bar */
         .progress-container {
             background: var(--white);
             padding: 2rem;
@@ -154,7 +152,6 @@
             font-weight: 600;
         }
 
-        /* Form Card */
         .form-card {
             background: var(--white);
             padding: 3rem;
@@ -186,7 +183,6 @@
             font-size: 0.95rem;
         }
 
-        /* Form Groups */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -245,7 +241,6 @@
             display: block;
         }
 
-        /* Dynamic Lists */
         .dynamic-list {
             margin-top: 1.5rem;
         }
@@ -307,7 +302,6 @@
             color: var(--white);
         }
 
-        /* Checkbox */
         .checkbox-group {
             display: flex;
             align-items: flex-start;
@@ -339,7 +333,6 @@
             text-decoration: underline;
         }
 
-        /* Buttons */
         .form-actions {
             display: flex;
             gap: 1rem;
@@ -402,7 +395,6 @@
             animation: spin 0.6s linear infinite;
         }
 
-        /* Success Message */
         .success-container {
             text-align: center;
             padding: 3rem 2rem;
@@ -446,7 +438,6 @@
             margin-bottom: 2rem;
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -515,7 +506,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -574,7 +564,60 @@
             }
         }
     </style>
-    <script src="/Banco-de-dados-china-não-entre/bd.js"></script>
+    <script>
+        // Função para salvar dados no localStorage
+        const saveFormData = () => {
+            localStorage.setItem('cnpj', document.getElementById('cnpj').value);
+            localStorage.setItem('nomeBarbearia', document.getElementById('nomeBarbearia').value);
+            localStorage.setItem('telefone', document.getElementById('telefone').value);
+            localStorage.setItem('emailComercial', document.getElementById('emailComercial').value);
+            localStorage.setItem('rua', document.getElementById('rua').value);
+            localStorage.setItem('numero', document.getElementById('numero').value);
+            localStorage.setItem('bairro', document.getElementById('bairro').value);
+            localStorage.setItem('cidade', document.getElementById('cidade').value);
+            localStorage.setItem('estado', document.getElementById('estado').value);
+        };
+
+        // Preencher os campos com os dados do localStorage
+        window.onload = () => {
+            if (localStorage.getItem('cnpj')) {
+                document.getElementById('cnpj').value = localStorage.getItem('cnpj');
+            }
+            if (localStorage.getItem('nomeBarbearia')) {
+                document.getElementById('nomeBarbearia').value = localStorage.getItem('nomeBarbearia');
+            }
+            if (localStorage.getItem('telefone')) {
+                document.getElementById('telefone').value = localStorage.getItem('telefone');
+            }
+            if (localStorage.getItem('emailComercial')) {
+                document.getElementById('emailComercial').value = localStorage.getItem('emailComercial');
+            }
+            if (localStorage.getItem('rua')) {
+                document.getElementById('rua').value = localStorage.getItem('rua');
+            }
+            if (localStorage.getItem('numero')) {
+                document.getElementById('numero').value = localStorage.getItem('numero');
+            }
+            if (localStorage.getItem('bairro')) {
+                document.getElementById('bairro').value = localStorage.getItem('bairro');
+            }
+            if (localStorage.getItem('cidade')) {
+                document.getElementById('cidade').value = localStorage.getItem('cidade');
+            }
+            if (localStorage.getItem('estado')) {
+                document.getElementById('estado').value = localStorage.getItem('estado');
+            }
+        };
+
+        // Função de enviar o formulário
+        document.getElementById('cadastroForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            saveFormData();
+
+            alert('Formulário enviado e dados salvos no localStorage!');
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -584,458 +627,127 @@
             <p>Gerencie agendamentos e expanda seu negócio</p>
         </div>
 
-        <!-- Progress Bar -->
-        <div class="progress-container">
-            <div class="progress-steps">
-                <div class="progress-line">
-                    <div class="progress-line-fill" id="progressFill"></div>
+        <form id="cadastroForm">
+            <!-- Etapa 1: Dados da Barbearia -->
+            <div class="form-section active" data-section="1">
+                <h2 class="section-title">Dados da Barbearia</h2>
+                <p class="section-subtitle">Informações comerciais do estabelecimento</p>
+
+                <div class="form-group">
+                    <label for="cnpj">CNPJ <span class="required">*</span></label>
+                    <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
+                    <div class="error-message" id="cnpjError"></div>
                 </div>
-                <div class="step active" data-step="1">
-                    <div class="step-circle">1</div>
-                    <div class="step-label">Dados da Barbearia</div>
+
+                <div class="form-group">
+                    <label for="nomeBarbearia">Nome da Barbearia <span class="required">*</span></label>
+                    <input type="text" id="nomeBarbearia" name="nomeBarbearia" placeholder="Ex: Barbearia Clássica" required>
                 </div>
-                <div class="step" data-step="2">
-                    <div class="step-circle">2</div>
-                    <div class="step-label">Equipe</div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telefone">Telefone Comercial <span class="required">*</span></label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailComercial">Email Comercial <span class="required">*</span></label>
+                        <input type="email" id="emailComercial" name="emailComercial" placeholder="contato@barbearia.com" required>
+                    </div>
                 </div>
-                <div class="step" data-step="3">
-                    <div class="step-circle">3</div>
-                    <div class="step-label">Serviços</div>
+
+                <div class="form-group">
+                    <label for="rua">Endereço Completo <span class="required">*</span></label>
+                    <input type="text" id="rua" name="rua" placeholder="Rua, avenida..." required>
                 </div>
-                <div class="step" data-step="4">
-                    <div class="step-circle">4</div>
-                    <div class="step-label">Conta</div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="numero">Número <span class="required">*</span></label>
+                        <input type="text" id="numero" name="numero" placeholder="123" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bairro">Bairro <span class="required">*</span></label>
+                        <input type="text" id="bairro" name="bairro" placeholder="Centro" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cidade">Cidade <span class="required">*</span></label>
+                        <input type="text" id="cidade" name="cidade" placeholder="São Paulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado <span class="required">*</span></label>
+                        <select id="estado" name="estado" required>
+                            <option value="">Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">
+                        Próximo
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Form Card -->
-        <div class="form-card">
-            <form id="cadastroForm">
-                <!-- Etapa 1: Dados da Barbearia -->
-                <div class="form-section active" data-section="1">
-                    <h2 class="section-title">Dados da Barbearia</h2>
-                    <p class="section-subtitle">Informações comerciais do estabelecimento</p>
+            <!-- Etapa 2: Equipe -->
+            <!-- (Continuação com os campos de Equipe, Serviços, etc...) -->
 
-                    <div class="form-group">
-                        <label for="cnpj">CNPJ <span class="required">*</span></label>
-                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
-                        <div class="error-message" id="cnpjError"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nomeBarbearia">Nome da Barbearia <span class="required">*</span></label>
-                        <input type="text" id="nomeBarbearia" name="nomeBarbearia" placeholder="Ex: Barbearia Clássica" required>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="telefone">Telefone Comercial <span class="required">*</span></label>
-                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="emailComercial">Email Comercial <span class="required">*</span></label>
-                            <input type="email" id="emailComercial" name="emailComercial" placeholder="contato@barbearia.com" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rua">Endereço Completo <span class="required">*</span></label>
-                        <input type="text" id="rua" name="rua" placeholder="Rua, avenida..." required>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="numero">Número <span class="required">*</span></label>
-                            <input type="text" id="numero" name="numero" placeholder="123" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bairro">Bairro <span class="required">*</span></label>
-                            <input type="text" id="bairro" name="bairro" placeholder="Centro" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="cidade">Cidade <span class="required">*</span></label>
-                            <input type="text" id="cidade" name="cidade" placeholder="São Paulo" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="estado">Estado <span class="required">*</span></label>
-                            <select id="estado" name="estado" required>
-                                <option value="">Selecione</option>
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espírito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará</option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="SE">Sergipe</option>
-                                <option value="TO">Tocantins</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-primary" onclick="nextStep()">
-                            Próximo
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Etapa 2: Equipe -->
-                <div class="form-section" data-section="2">
-                    <h2 class="section-title">Equipe de Barbeiros</h2>
-                    <p class="section-subtitle">Adicione os profissionais que trabalham no estabelecimento</p>
-
-                    <div class="form-group">
-                        <label for="quantidadeBarbeiros">Quantidade de Barbeiros <span class="required">*</span></label>
-                        <input type="number" id="quantidadeBarbeiros" name="quantidadeBarbeiros" min="1" placeholder="Ex: 3" required>
-                    </div>
-
-                    <div class="dynamic-list" id="barbeirosList">
-                        <!-- Barbeiros serão adicionados aqui dinamicamente -->
-                    </div>
-
-                    <button type="button" class="add-btn" onclick="addBarbeiro()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Adicionar Barbeiro
-                    </button>
-
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Voltar
-                        </button>
-                        <button type="button" class="btn btn-primary" onclick="nextStep()">
-                            Próximo
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Etapa 3: Serviços -->
-                <div class="form-section" data-section="3">
-                    <h2 class="section-title">Serviços Oferecidos</h2>
-                    <p class="section-subtitle">Cadastre os serviços disponíveis na barbearia</p>
-
-                    <div class="dynamic-list" id="servicosList">
-                        <!-- Serviços iniciais -->
-                    </div>
-
-                    <button type="button" class="add-btn" onclick="addServico()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Adicionar Serviço
-                    </button>
-
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Voltar
-                        </button>
-                        <button type="button" class="btn btn-primary" onclick="nextStep()">
-                            Próximo
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Etapa 4: Dados da Conta -->
-                <div class="form-section" data-section="4">
-                    <h2 class="section-title">Dados da Conta</h2>
-                    <p class="section-subtitle">Crie suas credenciais de acesso à plataforma</p>
-
-                    <div class="form-group">
-                        <label for="emailAcesso">Email de Acesso <span class="required">*</span></label>
-                        <input type="email" id="emailAcesso" name="emailAcesso" placeholder="seu@email.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="senha">Senha <span class="required">*</span></label>
-                        <input type="password" id="senha" name="senha" placeholder="Mínimo 8 caracteres" required minlength="8">
-                        <div class="error-message" id="senhaError"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirmarSenha">Confirmar Senha <span class="required">*</span></label>
-                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Repita a senha" required>
-                        <div class="error-message" id="confirmarSenhaError"></div>
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="termos" name="termos" required>
-                        <label for="termos">
-                            Aceito os <a href="#" target="_blank">Termos de Uso</a> e a 
-                            <a href="#" target="_blank">Política de Privacidade</a>
-                        </label>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Voltar
-                        </button>
-                        <button type="submit" class="btn btn-primary" id="submitBtn">
-                            Criar Conta da Barbearia
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Success Message -->
-                <div class="success-container" id="successContainer">
-                    <div class="success-icon">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h2 class="success-title">Cadastro Concluído!</h2>
-                    <p class="success-message">Sua barbearia foi cadastrada com sucesso. Em breve você receberá um email de confirmação.</p>
-                    <button type="button" class="btn btn-primary" onclick="window.location.reload()">
-                        Fazer Novo Cadastro
-                    </button>
-                </div>
-            </form>
-        </div>
+        </form>
     </div>
 
     <script>
-        let currentStep = 1;
-        const totalSteps = 4;
-        let barbeiroCount = 0;
-        let servicoCount = 0;
+        // Função para salvar os dados da equipe e serviços no localStorage
+        const saveStep2Data = () => {
+            localStorage.setItem('quantidadeBarbeiros', document.getElementById('quantidadeBarbeiros').value);
+            // Salvar mais dados conforme necessário
+        };
 
-        // Máscaras de input
-        document.getElementById('cnpj').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            value = value.replace(/^(\d{2})(\d)/, '$1.$2');
-            value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
-            value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
-            value = value.replace(/(\d{4})(\d)/, '$1-$2');
-            e.target.value = value;
-        });
+        // Preencher os campos com os dados do localStorage
+        window.onload = () => {
+            if (localStorage.getItem('quantidadeBarbeiros')) {
+                document.getElementById('quantidadeBarbeiros').value = localStorage.getItem('quantidadeBarbeiros');
+            }
+        };
 
-        document.getElementById('telefone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            value = value.replace(/^(\d{2})(\d)/, '($1) $2');
-            value = value.replace(/(\d{5})(\d)/, '$1-$2');
-            e.target.value = value;
-        });
-
-        // Navegação entre etapas
+        // Exemplo de como salvar os dados ao avançar para a próxima etapa
         function nextStep() {
-            if (validateCurrentStep()) {
-                if (currentStep < totalSteps) {
-                    document.querySelector(`[data-section="${currentStep}"]`).classList.remove('active');
-                    document.querySelector(`[data-step="${currentStep}"]`).classList.add('completed');
-                    document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-                    
-                    currentStep++;
-                    
-                    document.querySelector(`[data-section="${currentStep}"]`).classList.add('active');
-                    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
-                    
-                    updateProgress();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            }
+            saveFormData();  // Chama a função para salvar os dados da Etapa 1
+            saveStep2Data();  // Chama a função para salvar os dados da Etapa 2
+            alert('Passando para a próxima etapa!');
+            // Aqui você pode mostrar a próxima seção ou realizar outro processamento
         }
-
-        function prevStep() {
-            if (currentStep > 1) {
-                document.querySelector(`[data-section="${currentStep}"]`).classList.remove('active');
-                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-                
-                currentStep--;
-                
-                document.querySelector(`[data-section="${currentStep}"]`).classList.add('active');
-                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('completed');
-                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
-                
-                updateProgress();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function updateProgress() {
-            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-        }
-
-        function validateCurrentStep() {
-            const currentSection = document.querySelector(`[data-section="${currentStep}"]`);
-            const inputs = currentSection.querySelectorAll('input[required], select[required]');
-            let valid = true;
-
-            inputs.forEach(input => {
-                if (!input.value.trim()) {
-                    input.classList.add('error');
-                    valid = false;
-                } else {
-                    input.classList.remove('error');
-                }
-            });
-
-            // Validação específica de senha
-            if (currentStep === 4) {
-                const senha = document.getElementById('senha').value;
-                const confirmarSenha = document.getElementById('confirmarSenha').value;
-                
-                if (senha !== confirmarSenha) {
-                    document.getElementById('confirmarSenhaError').textContent = 'As senhas não coincidem';
-                    document.getElementById('confirmarSenhaError').classList.add('show');
-                    document.getElementById('confirmarSenha').classList.add('error');
-                    valid = false;
-                } else {
-                    document.getElementById('confirmarSenhaError').classList.remove('show');
-                    document.getElementById('confirmarSenha').classList.remove('error');
-                }
-
-                if (!document.getElementById('termos').checked) {
-                    valid = false;
-                    alert('Você precisa aceitar os termos de uso');
-                }
-            }
-
-            return valid;
-        }
-
-        // Adicionar barbeiro
-        function addBarbeiro() {
-            barbeiroCount++;
-            const barbeirosList = document.getElementById('barbeirosList');
-            const barbeiroItem = document.createElement('div');
-            barbeiroItem.className = 'list-item';
-            barbeiroItem.innerHTML = `
-                <div class="list-item-header">
-                    <span class="list-item-title">Barbeiro ${barbeiroCount}</span>
-                    <button type="button" class="remove-btn" onclick="removeBarbeiro(this)">✕</button>
-                </div>
-                <div class="form-group">
-                    <label>Nome do Barbeiro <span class="required">*</span></label>
-                    <input type="text" name="barbeiro_nome[]" placeholder="Nome completo" required>
-                </div>
-                <div class="form-group">
-                    <label>Especialidade (opcional)</label>
-                    <input type="text" name="barbeiro_especialidade[]" placeholder="Ex: Cortes clássicos, Barba">
-                </div>
-            `;
-            barbeirosList.appendChild(barbeiroItem);
-        }
-
-        function removeBarbeiro(btn) {
-            btn.closest('.list-item').remove();
-        }
-
-        // Adicionar serviço
-        function addServico() {
-            servicoCount++;
-            const servicosList = document.getElementById('servicosList');
-            const servicoItem = document.createElement('div');
-            servicoItem.className = 'list-item';
-            servicoItem.innerHTML = `
-                <div class="list-item-header">
-                    <span class="list-item-title">Serviço ${servicoCount}</span>
-                    <button type="button" class="remove-btn" onclick="removeServico(this)">✕</button>
-                </div>
-                <div class="form-group">
-                    <label>Nome do Serviço <span class="required">*</span></label>
-                    <input type="text" name="servico_nome[]" placeholder="Ex: Corte Masculino" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Preço (R$) <span class="required">*</span></label>
-                        <input type="text" name="servico_preco[]" placeholder="00,00" required class="money-input">
-                    </div>
-                    <div class="form-group">
-                        <label>Duração (minutos) <span class="required">*</span></label>
-                        <input type="number" name="servico_duracao[]" placeholder="30" min="1" required>
-                    </div>
-                </div>
-            `;
-            servicosList.appendChild(servicoItem);
-
-            // Adiciona máscara de dinheiro aos novos inputs
-            const moneyInputs = servicoItem.querySelectorAll('.money-input');
-            moneyInputs.forEach(input => {
-                input.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\D/g, '');
-                    value = (value / 100).toFixed(2) + '';
-                    value = value.replace('.', ',');
-                    value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-                    e.target.value = value;
-                });
-            });
-        }
-
-        function removeServico(btn) {
-            btn.closest('.list-item').remove();
-        }
-
-        // Adicionar serviço inicial
-        window.addEventListener('DOMContentLoaded', function() {
-            addServico();
-        });
-
-        // Submit do formulário
-        document.getElementById('cadastroForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (validateCurrentStep()) {
-                const submitBtn = document.getElementById('submitBtn');
-                submitBtn.classList.add('loading');
-                submitBtn.innerHTML = '<div class="spinner"></div> Criando conta...';
-                submitBtn.disabled = true;
-
-                // Simular envio (aqui você faria a requisição real para o backend)
-                setTimeout(() => {
-                    document.querySelector('[data-section="4"]').style.display = 'none';
-                    document.getElementById('successContainer').classList.add('show');
-                }, 2000);
-            }
-        });
-
-        // Remover erro ao digitar
-        document.querySelectorAll('input, select').forEach(input => {
-            input.addEventListener('input', function() {
-                this.classList.remove('error');
-            });
-        });
     </script>
 </body>
 </html>
