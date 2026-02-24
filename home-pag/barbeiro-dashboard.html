@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbershop Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Barbershop Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="#appointments">Appointments</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#barbers">Barbers</a></li>
+                <li><a href="#reports">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="appointments">
+            <h2>Manage Appointments</h2>
+            <button>Add Appointment</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Appointments will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+        <section id="services">
+            <h2>Manage Services</h2>
+            <button>Add Service</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service Name</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Services will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+        <section id="barbers">
+            <h2>Manage Barbers</h2>
+            <button>Add Barber</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Barber Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Barbers will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+        <section id="reports">
+            <h2>Generate Reports</h2>
+            <button>Generate Report</button>
+            <div>
+                <!-- Report content will be displayed here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Da-Hora Stack. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
