@@ -1,27 +1,806 @@
-<section id="gallery" class="gallery-section">
-  <div class="gallery-container">
-    <img src="image1.jpg" alt="Image 1">
-    <img src="image2.jpg" alt="Image 2">
-    <img src="image3.jpg" alt="Image 3">
-    <img src="image4.jpg" alt="Image 4">
-    <img src="image5.jpg" alt="Image 5">
-    <img src="image6.jpg" alt="Image 6">
-  </div>
-</section>
-<style>
-  .gallery-section {
-    padding: 20px;
-    background-color: #f9f9f9;
-    text-align: center;
-  }
-  .gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-  }
-  .gallery-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberApp - Encontre sua Barbearia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F3F4F6;
+            color: #1F2937;
+        }
+
+        header {
+            background-color: #2563EB;
+            color: #FFFFFF;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 2rem;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563EB;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2563EB 0%, #1F2937 100%);
+            color: #FFFFFF;
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .filter-section {
+            background-color: #FFFFFF;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-section h3 {
+            margin-bottom: 1rem;
+            color: #1F2937;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid #9CA3AF;
+            background-color: #FFFFFF;
+            color: #1F2937;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border-color: #2563EB;
+        }
+
+        .barbershops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .barbershop-card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .barbershop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .barbershop-image {
+            width: 100%;
+            height: 200px;
+            background-color: #9CA3AF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #FFFFFF;
+        }
+
+        .barbershop-info {
+            padding: 1.5rem;
+        }
+
+        .barbershop-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .barbershop-location {
+            color: #9CA3AF;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stars {
+            color: #FCD34D;
+        }
+
+        .rating-text {
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+
+        .price {
+            color: #2563EB;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: #FFFFFF;
+            margin: 2rem auto;
+            padding: 0;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #2563EB 0%, #1F2937 100%);
+            color: #FFFFFF;
+            padding: 2rem;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-header h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .close {
+            color: #FFFFFF;
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .service-section {
+            margin-bottom: 2rem;
+        }
+
+        .service-section h3 {
+            color: #1F2937;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #F3F4F6;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .service-item:hover {
+            background-color: #2563EB;
+            color: #FFFFFF;
+        }
+
+        .service-item.selected {
+            background-color: #2563EB;
+            color: #FFFFFF;
+        }
+
+        .service-name {
+            font-weight: 500;
+        }
+
+        .service-price {
+            font-weight: bold;
+        }
+
+        .date-time-section {
+            margin-bottom: 2rem;
+        }
+
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .date-btn {
+            padding: 0.75rem;
+            border: 2px solid #9CA3AF;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .date-btn:hover,
+        .date-btn.selected {
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border-color: #2563EB;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .time-btn {
+            padding: 0.75rem;
+            border: 2px solid #9CA3AF;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .time-btn:hover,
+        .time-btn.selected {
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border-color: #2563EB;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .confirm-btn:hover {
+            background-color: #1F2937;
+        }
+
+        .confirm-btn:disabled {
+            background-color: #9CA3AF;
+            cursor: not-allowed;
+        }
+
+        .booking-summary {
+            background-color: #F3F4F6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #1F2937;
+        }
+
+        .summary-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding-top: 0.5rem;
+            border-top: 2px solid #9CA3AF;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-bar {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .barbershops-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script src="/Banco-de-dados-china-não-entre/bd.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">✂️ BarberApp</div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar barbearias...">
+            </div>
+            <div class="user-icon">U</div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Encontre a Barbearia Perfeita</h1>
+            <p>Agende seu corte com os melhores profissionais da região</p>
+        </section>
+
+        <section class="filter-section">
+            <h3>Filtros</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="nearby">Próximos</button>
+                <button class="filter-btn" data-filter="rating">Melhor Avaliados</button>
+                <button class="filter-btn" data-filter="price">Melhor Preço</button>
+            </div>
+        </section>
+
+        <section class="barbershops-grid" id="barbershopsGrid">
+            <!-- Barbearias serão inseridas aqui via JavaScript -->
+        </section>
+    </main>
+
+    <!-- Modal de Agendamento -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 id="modalBarbershopName">Nome da Barbearia</h2>
+                <p id="modalBarbershopLocation">📍 Localização</p>
+            </div>
+            <div class="modal-body">
+                <div class="service-section">
+                    <h3>Escolha o Serviço</h3>
+                    <div class="services-list" id="servicesList">
+                        <!-- Serviços serão inseridos aqui -->
+                    </div>
+                </div>
+
+                <div class="date-time-section">
+                    <h3>Escolha a Data</h3>
+                    <div class="date-grid" id="dateGrid">
+                        <!-- Datas serão inseridas aqui -->
+                    </div>
+                </div>
+                <div class="date-time-section">
+                    <h3>Escolha o Horário</h3>
+                    <div class="time-grid" id="timeGrid">
+                        <!-- Horários serão inseridos aqui -->
+                    </div>
+                </div>
+
+                <div class="booking-summary" id="bookingSummary" style="display: none;">
+                    <h3 style="margin-bottom: 1rem;">Resumo do Agendamento</h3>
+                    <div class="summary-item">
+                        <span>Serviço:</span>
+                        <span id="summaryService">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Data:</span>
+                        <span id="summaryDate">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Horário:</span>
+                        <span id="summaryTime">-</span>
+                    </div>
+                    <div class="summary-item summary-total">
+                        <span>Total:</span>
+                        <span id="summaryTotal">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <button class="confirm-btn" id="confirmBtn" disabled>Confirmar Agendamento</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados das barbearias
+        const barbershops = [
+            {
+                id: 1,
+                name: "Barber Shop Premium",
+                location: "Centro, 1.2km",
+                rating: 4.9,
+                reviews: 234,
+                price: "R$ 45",
+                emoji: "💈",
+                services: [
+                    { name: "Corte Tradicional", price: 45 },
+                    { name: "Barba", price: 35 },
+                    { name: "Corte + Barba", price: 70 },
+                    { name: "Hidratação", price: 25 }
+                ]
+            },
+            {
+                id: 2,
+                name: "Estilo & Classe",
+                location: "Bairro Alto, 2.5km",
+                rating: 4.8,
+                reviews: 189,
+                price: "R$ 50",
+                emoji: "✂️",
+                services: [
+                    { name: "Corte Moderno", price: 50 },
+                    { name: "Degradê", price: 55 },
+                    { name: "Barba Completa", price: 40 },
+                    { name: "Combo Premium", price: 85 }
+                ]
+            },
+            {
+                id: 3,
+                name: "Barbeiro do João",
+                location: "Vila Nova, 0.8km",
+                rating: 4.7,
+                reviews: 156,
+                price: "R$ 40",
+                emoji: "🪒",
+                services: [
+                    { name: "Corte Simples", price: 40 },
+                    { name: "Corte + Acabamento", price: 50 },
+                    { name: "Barba", price: 30 },
+                    { name: "Pacote Completo", price: 65 }
+                ]
+            },
+            {
+                id: 4,
+                name: "Clássico Barbearia",
+                location: "Jardim Europa, 3.1km",
+                rating: 4.9,
+                reviews: 298,
+                price: "R$ 55",
+                emoji: "👔",
+                services: [
+                    { name: "Corte Clássico", price: 55 },
+                    { name: "Barba Tradicional", price: 45 },
+                    { name: "Tratamento Capilar", price: 35 },
+                    { name: "Experiência Completa", price: 95 }
+                ]
+            },
+            {
+                id: 5,
+                name: "Modern Cut",
+                location: "Shopping Center, 4.0km",
+                rating: 4.6,
+                reviews: 127,
+                price: "R$ 48",
+                emoji: "🎨",
+                services: [
+                    { name: "Corte Estilizado", price: 48 },
+                    { name: "Design de Barba", price: 38 },
+                    { name: "Coloração", price: 80 },
+                    { name: "Combo Style", price: 75 }
+                ]
+            },
+            {
+                id: 6,
+                name: "Seu Manoel Barbeiro",
+                location: "Parque da Cidade, 1.5km",
+                rating: 4.8,
+                reviews: 201,
+                price: "R$ 42",
+                emoji: "🏆",
+                services: [
+                    { name: "Corte Tradicional", price: 42 },
+                    { name: "Barba & Bigode", price: 32 },
+                    { name: "Navalha", price: 28 },
+                    { name: "Combo Completo", price: 68 }
+                ]
+            }
+        ];
+
+        // Gerar cards das barbearias
+        function renderBarbershops() {
+            const grid = document.getElementById('barbershopsGrid');
+            grid.innerHTML = '';
+
+            barbershops.forEach(shop => {
+                const card = document.createElement('div');
+                card.className = 'barbershop-card';
+                card.onclick = () => openBookingModal(shop);
+
+                card.innerHTML = `
+                    <div class="barbershop-image">${shop.emoji}</div>
+                    <div class="barbershop-info">
+                        <div class="barbershop-name">${shop.name}</div>
+                        <div class="barbershop-location">📍 ${shop.location}</div>
+                        <div class="rating">
+                            <span class="stars">⭐ ${shop.rating}</span>
+                            <span class="rating-text">(${shop.reviews} avaliações)</span>
+                        </div>
+                        <div class="price">A partir de ${shop.price}</div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Variáveis do modal
+        let selectedService = null;
+        let selectedDate = null;
+        let selectedTime = null;
+        let currentBarbershop = null;
+
+        // Abrir modal de agendamento
+        function openBookingModal(barbershop) {
+            currentBarbershop = barbershop;
+            const modal = document.getElementById('bookingModal');
+            document.getElementById('modalBarbershopName').textContent = barbershop.name;
+            document.getElementById('modalBarbershopLocation').textContent = `📍 ${barbershop.location}`;
+
+            // Reset seleções
+            selectedService = null;
+            selectedDate = null;
+            selectedTime = null;
+            document.getElementById('bookingSummary').style.display = 'none';
+            document.getElementById('confirmBtn').disabled = true;
+
+            // Renderizar serviços
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+            barbershop.services.forEach((service, index) => {
+                const serviceItem = document.createElement('div');
+                serviceItem.className = 'service-item';
+                serviceItem.onclick = () => selectService(service, serviceItem);
+                serviceItem.innerHTML = `
+                    <span class="service-name">${service.name}</span>
+                    <span class="service-price">R$ ${service.price}</span>
+                `;
+                servicesList.appendChild(serviceItem);
+            });
+
+            // Gerar datas (próximos 7 dias)
+            generateDates();
+
+            // Gerar horários
+            generateTimes();
+
+            modal.style.display = 'block';
+        }
+
+        // Selecionar serviço
+        function selectService(service, element) {
+            selectedService = service;
+            document.querySelectorAll('.service-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            updateBookingSummary();
+        }
+
+        // Gerar datas
+        function generateDates() {
+            const dateGrid = document.getElementById('dateGrid');
+            dateGrid.innerHTML = '';
+            const today = new Date();
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+
+                const dateBtn = document.createElement('div');
+                dateBtn.className = 'date-btn';
+                dateBtn.onclick = () => selectDate(date, dateBtn);
+
+                const dayName = date.toLocaleDateString('pt-BR', { weekday: 'short' });
+                const dayNumber = date.getDate();
+                const month = date.toLocaleDateString('pt-BR', { month: 'short' });
+
+                dateBtn.innerHTML = `
+                    <div style="font-size: 0.8rem; text-transform: capitalize;">${dayName}</div>
+                    <div style="font-size: 1.2rem; font-weight: bold;">${dayNumber}</div>
+                    <div style="font-size: 0.8rem;">${month}</div>
+                `;
+
+                dateGrid.appendChild(dateBtn);
+            }
+        }
+
+        // Selecionar data
+        function selectDate(date, element) {
+            selectedDate = date;
+            document.querySelectorAll('.date-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            updateBookingSummary();
+        }
+
+        // Gerar horários
+        function generateTimes() {
+            const timeGrid = document.getElementById('timeGrid');
+            timeGrid.innerHTML = '';
+            const times = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+
+            times.forEach(time => {
+                const timeBtn = document.createElement('div');
+                timeBtn.className = 'time-btn';
+                timeBtn.textContent = time;
+                timeBtn.onclick = () => selectTime(time, timeBtn);
+                timeGrid.appendChild(timeBtn);
+            });
+        }
+
+        // Selecionar horário
+        function selectTime(time, element) {
+            selectedTime = time;
+            document.querySelectorAll('.time-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            updateBookingSummary();
+        }
+
+        // Atualizar resumo do agendamento
+        function updateBookingSummary() {
+            const summary = document.getElementById('bookingSummary');
+            const confirmBtn = document.getElementById('confirmBtn');
+
+            if (selectedService && selectedDate && selectedTime) {
+                summary.style.display = 'block';
+                confirmBtn.disabled = false;
+
+                document.getElementById('summaryService').textContent = selectedService.name;
+                document.getElementById('summaryDate').textContent = selectedDate.toLocaleDateString('pt-BR');
+                document.getElementById('summaryTime').textContent = selectedTime;
+                document.getElementById('summaryTotal').textContent = `R$ ${selectedService.price},00`;
+            } else {
+                confirmBtn.disabled = true;
+            }
+        }
+
+        // Confirmar agendamento
+        document.getElementById('confirmBtn').onclick = function () {
+            alert(`Agendamento confirmado!\n\nBarbearia: ${currentBarbershop.name}\nServiço: ${selectedService.name}\nData: ${selectedDate.toLocaleDateString('pt-BR')}\nHorário: ${selectedTime}\nValor: R$ ${selectedService.price},00`);
+            document.getElementById('bookingModal').style.display = 'none';
+        };
+
+        // Fechar modal
+        document.querySelector('.close').onclick = function () {
+            document.getElementById('bookingModal').style.display = 'none';
+        };
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('bookingModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Busca
+        document.getElementById('searchInput').addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.barbershop-card');
+
+            cards.forEach(card => {
+                const name = card.querySelector('.barbershop-name').textContent.toLowerCase();
+                if (name.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Filtros
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Inicializar
+        renderBarbershops();
+    </script>
+</body>
+
+</html>
