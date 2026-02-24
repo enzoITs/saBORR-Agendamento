@@ -1,0 +1,39 @@
+.barbershop-dashboard {
+    background-color: #f8f9fa;
+    color: #343a40;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+.barbershop-dashboard h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.barbershop-dashboard .appointment {
+    border: 1px solid #343a40;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.barbershop-dashboard .appointment .client-name {
+    font-weight: bold;
+}
+
+.barbershop-dashboard .appointment .time {
+    font-style: italic;
+}
+
+.barbershop-dashboard .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.barbershop-dashboard .btn:hover {
+    background-color: #0056b3;
+}
