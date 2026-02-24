@@ -511,7 +511,7 @@
                 rating: 4.9,
                 reviews: 234,
                 price: "R$ 45",
-                emoji: "💈",
+                image: "https://assets.grok.com/anon-users/f8c84aad-e333-4b8b-a0fa-8513fb409ed3/generated/46acf0f4-dea7-4963-a7b4-6122ff11176a/image.jpg",
                 services: [
                     { name: "Corte Tradicional", price: 45 },
                     { name: "Barba", price: 35 },
@@ -526,7 +526,7 @@
                 rating: 4.8,
                 reviews: 189,
                 price: "R$ 50",
-                emoji: "✂️",
+                image: "https://assets.grok.com/anon-users/f8c84aad-e333-4b8b-a0fa-8513fb409ed3/generated/f3d0507a-0110-41dc-8149-0c23a1d48cba/image.jpg",
                 services: [
                     { name: "Corte Moderno", price: 50 },
                     { name: "Degradê", price: 55 },
@@ -541,7 +541,7 @@
                 rating: 4.7,
                 reviews: 156,
                 price: "R$ 40",
-                emoji: "🪒",
+                image: "https://assets.grok.com/anon-users/f8c84aad-e333-4b8b-a0fa-8513fb409ed3/generated/b4e681df-310c-4654-9e34-4f2508f19371/image.jpg",
                 services: [
                     { name: "Corte Simples", price: 40 },
                     { name: "Corte + Acabamento", price: 50 },
@@ -556,7 +556,7 @@
                 rating: 4.9,
                 reviews: 298,
                 price: "R$ 55",
-                emoji: "👔",
+                image: "https://assets.grok.com/anon-users/f8c84aad-e333-4b8b-a0fa-8513fb409ed3/generated/b6558edf-5168-4863-ac83-bc313f551442/image.jpg",
                 services: [
                     { name: "Corte Clássico", price: 55 },
                     { name: "Barba Tradicional", price: 45 },
@@ -571,7 +571,7 @@
                 rating: 4.6,
                 reviews: 127,
                 price: "R$ 48",
-                emoji: "🎨",
+                image: "https://assets.grok.com/anon-users/f8c84aad-e333-4b8b-a0fa-8513fb409ed3/generated/28f39c9d-04cc-4874-90c4-cc836bf98ea2/image.jpg",
                 services: [
                     { name: "Corte Estilizado", price: 48 },
                     { name: "Design de Barba", price: 38 },
@@ -586,7 +586,7 @@
                 rating: 4.8,
                 reviews: 201,
                 price: "R$ 42",
-                emoji: "🏆",
+                image: "https://assets.grok.com/anon-users/f8c84aad-e333-4b8b-a0fa-8513fb409ed3/generated/1855d73d-f9cc-437c-ad7e-c9f815849a85/image.jpg",
                 services: [
                     { name: "Corte Tradicional", price: 42 },
                     { name: "Barba & Bigode", price: 32 },
@@ -595,7 +595,6 @@
                 ]
             }
         ];
-
         // Gerar cards das barbearias
         function renderBarbershops() {
             const grid = document.getElementById('barbershopsGrid');
@@ -607,7 +606,9 @@
                 card.onclick = () => openBookingModal(shop);
 
                 card.innerHTML = `
-                    <div class="barbershop-image">${shop.emoji}</div>
+                    <div class="barbershop-image">
+    <img src="${shop.image}" alt="${shop.name}">
+</div>
                     <div class="barbershop-info">
                         <div class="barbershop-name">${shop.name}</div>
                         <div class="barbershop-location">📍 ${shop.location}</div>
