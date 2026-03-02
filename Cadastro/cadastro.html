@@ -43,36 +43,6 @@
             overflow-x: hidden;
         }
 
-        /* Background decorativo */
-        body::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -30%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 15s ease-in-out infinite;
-        }
-
-        body::after {
-            content: '';
-            position: absolute;
-            bottom: -40%;
-            left: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse 20s ease-in-out infinite reverse;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.5; }
-            50% { transform: scale(1.1) translate(20px, -20px); opacity: 0.8; }
-        }
-
         .signup-container {
             position: relative;
             width: 100%;
@@ -101,17 +71,6 @@
             overflow: hidden;
         }
 
-        /* Elemento decorativo no topo do card */
-        .signup-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-        }
-
         .logo {
             width: 56px;
             height: 56px;
@@ -128,14 +87,6 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
-        }
-
-        .logo svg {
-            width: 32px;
-            height: 32px;
-            stroke: var(--color-white);
-            stroke-width: 2;
-            fill: none;
         }
 
         .header {
@@ -208,15 +159,6 @@
             outline: none;
         }
 
-        .form-group select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 48px;
-        }
-
         .form-group input::placeholder {
             color: var(--color-gray);
         }
@@ -225,131 +167,6 @@
         .form-group select:focus {
             border-color: var(--color-primary);
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
-
-        .form-group input:focus ~ .input-icon,
-        .form-group select:focus ~ .input-icon {
-            color: var(--color-primary);
-        }
-
-        .form-group.has-error input,
-        .form-group.has-error select {
-            border-color: var(--color-error);
-        }
-
-        .form-group.has-error input:focus,
-        .form-group.has-error select:focus {
-            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
-        }
-
-        .form-group.has-success input,
-        .form-group.has-success select {
-            border-color: var(--color-success);
-        }
-
-        .error-message {
-            display: none;
-            font-size: 13px;
-            color: var(--color-error);
-            margin-top: 6px;
-            animation: shake 0.4s ease;
-        }
-
-        .form-group.has-error .error-message {
-            display: block;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
-        }
-
-        .password-strength {
-            margin-top: 8px;
-            display: none;
-        }
-
-        .password-strength.show {
-            display: block;
-        }
-
-        .strength-bar {
-            height: 4px;
-            background: #E5E7EB;
-            border-radius: 2px;
-            overflow: hidden;
-            margin-bottom: 6px;
-        }
-
-        .strength-fill {
-            height: 100%;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-        }
-
-        .strength-fill.weak {
-            width: 33%;
-            background: var(--color-error);
-        }
-
-        .strength-fill.medium {
-            width: 66%;
-            background: #F59E0B;
-        }
-
-        .strength-fill.strong {
-            width: 100%;
-            background: var(--color-success);
-        }
-
-        .strength-text {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .strength-text.weak { color: var(--color-error); }
-        .strength-text.medium { color: #F59E0B; }
-        .strength-text.strong { color: var(--color-success); }
-
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 32px;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: var(--color-primary);
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
-        .checkbox-group label {
-            font-size: 14px;
-            color: var(--color-dark);
-            cursor: pointer;
-            line-height: 1.5;
-        }
-
-        .checkbox-group label a {
-            color: var(--color-primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-
-        .checkbox-group label a:hover {
-            color: var(--color-primary-dark);
-        }
-
-        .checkbox-group.has-error {
-            animation: shake 0.4s ease;
         }
 
         .btn-primary {
@@ -364,168 +181,10 @@
             font-family: 'Sora', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-            position: relative;
-            overflow: hidden;
-            letter-spacing: 0.02em;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
         }
 
         .btn-primary:active {
             transform: translateY(0);
-        }
-
-        .btn-primary.loading {
-            pointer-events: none;
-            opacity: 0.8;
-        }
-
-        .btn-primary.loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin-left: -10px;
-            margin-top: -10px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--color-white);
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 32px 0;
-            gap: 16px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #E5E7EB;
-        }
-
-        .divider span {
-            font-size: 13px;
-            color: var(--color-gray);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .social-signup {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .btn-social {
-            padding: 12px;
-            background: var(--color-white);
-            border: 2px solid #E5E7EB;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: var(--color-dark);
-        }
-
-        .btn-social:hover {
-            border-color: var(--color-primary);
-            background: rgba(37, 99, 235, 0.02);
-            transform: translateY(-2px);
-        }
-
-        .btn-social svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .login-link {
-            text-align: center;
-            font-size: 14px;
-            color: var(--color-gray);
-        }
-
-        .login-link a {
-            color: var(--color-primary);
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.2s ease;
-        }
-
-        .login-link a:hover {
-            color: var(--color-primary-dark);
-        }
-
-        .alert {
-            padding: 14px 16px;
-            border-radius: 12px;
-            font-size: 14px;
-            margin-bottom: 24px;
-            display: none;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .alert.show {
-            display: block;
-        }
-
-        .alert-success {
-            background: #D1FAE5;
-            color: #065F46;
-            border: 1px solid #10B981;
-        }
-
-        .alert-error {
-            background: #FEE2E2;
-            color: #991B1B;
-            border: 1px solid #EF4444;
         }
 
         /* Responsividade */
@@ -547,27 +206,8 @@
                 grid-template-columns: 1fr;
                 gap: 0;
             }
-
-            .social-signup {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 400px) {
-            body {
-                padding: 16px;
-            }
-
-            .signup-card {
-                padding: 24px 20px;
-            }
-
-            .header h1 {
-                font-size: 24px;
-            }
         }
     </style>
-    <script src="/Banco-de-dados-china-não-entre/bd.js"></script>
 </head>
 <body>
     <div class="signup-container">
@@ -583,146 +223,82 @@
                 <p>Comece a gerenciar seus agendamentos de forma profissional</p>
             </div>
 
-            <div class="alert alert-error" id="alertError">
-                Erro ao criar conta. Tente novamente.
-            </div>
-
-            <div class="alert alert-success" id="alertSuccess">
-                Conta criada com sucesso!
-            </div>
-
             <form id="signupForm">
                 <div class="form-row">
                     <div class="form-group" id="firstNameGroup">
                         <label for="firstName">Nome</label>
-                        <div class="input-wrapper">
-                            <input 
-                                type="text" 
-                                id="firstName" 
-                                name="firstName" 
-                                placeholder="João"
-                                autocomplete="given-name"
-                            >
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
-                        </div>
-                        <div class="error-message">Nome é obrigatório</div>
+                        <input 
+                            type="text" 
+                            id="firstName" 
+                            name="firstName" 
+                            placeholder="João"
+                            autocomplete="given-name"
+                        >
                     </div>
 
                     <div class="form-group" id="lastNameGroup">
                         <label for="lastName">Sobrenome</label>
-                        <div class="input-wrapper">
-                            <input 
-                                type="text" 
-                                id="lastName" 
-                                name="lastName" 
-                                placeholder="Silva"
-                                autocomplete="family-name"
-                            >
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
-                        </div>
-                        <div class="error-message">Sobrenome é obrigatório</div>
+                        <input 
+                            type="text" 
+                            id="lastName" 
+                            name="lastName" 
+                            placeholder="Silva"
+                            autocomplete="family-name"
+                        >
                     </div>
                 </div>
 
                 <div class="form-group" id="emailGroup">
                     <label for="email">E-mail</label>
-                    <div class="input-wrapper">
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            placeholder="seu@email.com"
-                            autocomplete="email"
-                        >
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                            <polyline points="22,6 12,13 2,6"/>
-                        </svg>
-                    </div>
-                    <div class="error-message">Digite um e-mail válido</div>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="seu@email.com"
+                        autocomplete="email"
+                    >
                 </div>
 
                 <div class="form-group" id="phoneGroup">
                     <label for="phone">Telefone</label>
-                    <div class="input-wrapper">
-                        <input 
-                            type="tel" 
-                            id="phone" 
-                            name="phone" 
-                            placeholder="(00) 00000-0000"
-                            autocomplete="tel"
-                        >
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                        </svg>
-                    </div>
-                    <div class="error-message">Digite um telefone válido</div>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        placeholder="(00) 00000-0000"
+                        autocomplete="tel"
+                    >
                 </div>
 
                 <div class="form-group" id="userTypeGroup">
                     <label for="userType">Tipo de usuário</label>
-                    <div class="input-wrapper">
-                        <select id="userType" name="userType">
-                            <option value="">Selecione...</option>
-                            <option value="customer">Cliente</option>
-                            <option value="professional">Profissional</option>
-                        </select>
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                    </div>
-                    <div class="error-message">Selecione o tipo de usuário</div>
+                    <select id="userType" name="userType">
+                        <option value="">Selecione...</option>
+                        <option value="customer">Cliente</option>
+                        <option value="professional">Profissional</option>
+                    </select>
                 </div>
 
                 <div class="form-group" id="passwordGroup">
                     <label for="password">Senha</label>
-                    <div class="input-wrapper">
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            placeholder="••••••••"
-                            autocomplete="new-password"
-                        >
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                            <path d="M7 11V7a5 5 0 0110 0v4"/>
-                        </svg>
-                    </div>
-                    <div class="password-strength" id="passwordStrength">
-                        <div class="strength-bar">
-                            <div class="strength-fill" id="strengthFill"></div>
-                        </div>
-                        <div class="strength-text" id="strengthText"></div>
-                    </div>
-                    <div class="error-message">A senha deve ter no mínimo 8 caracteres</div>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="••••••••"
+                        autocomplete="new-password"
+                    >
                 </div>
 
                 <div class="form-group" id="confirmPasswordGroup">
                     <label for="confirmPassword">Confirmar Senha</label>
-                    <div class="input-wrapper">
-                        <input 
-                            type="password" 
-                            id="confirmPassword" 
-                            name="confirmPassword" 
-                            placeholder="••••••••"
-                            autocomplete="new-password"
-                        >
-                        <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                            <path d="M7 11V7a5 5 0 0110 0v4"/>
-                        </svg>
-                    </div>
-                    <div class="error-message">As senhas não coincidem</div>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        placeholder="••••••••"
+                        autocomplete="new-password"
+                    >
                 </div>
 
                 <div class="checkbox-group" id="termsGroup">
@@ -732,36 +308,11 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn-primary" id="btnSignup" onclick="window.location.href='/home-pag/home-pag.html'">
+                <button type="submit" class="btn-primary" id="btnSignup">
                     Criar Conta
                 </button>
             </form>
 
-            <div class="divider">
-                <span>ou cadastre-se com</span>
-            </div>
-
-            <div class="social-signup">
-                <button type="button" class="btn-social" id="btnGoogle">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                    </svg>
-                    Google
-                </button>
-                <button type="button" class="btn-social" id="btnFacebook">
-                    <svg viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                    Facebook
-                </button>
-            </div>
-
-            <div class="login-link">
-                Já tem uma conta? <a href="/Login/login.html">Fazer login</a>
-            </div>
         </div>
     </div>
 
@@ -769,8 +320,6 @@
         // Elementos do DOM
         const signupForm = document.getElementById('signupForm');
         const btnSignup = document.getElementById('btnSignup');
-        const alertError = document.getElementById('alertError');
-        const alertSuccess = document.getElementById('alertSuccess');
 
         // Inputs
         const firstName = document.getElementById('firstName');
@@ -782,240 +331,60 @@
         const confirmPassword = document.getElementById('confirmPassword');
         const terms = document.getElementById('terms');
 
-        // Grupos
-        const firstNameGroup = document.getElementById('firstNameGroup');
-        const lastNameGroup = document.getElementById('lastNameGroup');
-        const emailGroup = document.getElementById('emailGroup');
-        const phoneGroup = document.getElementById('phoneGroup');
-        const userTypeGroup = document.getElementById('userTypeGroup');
-        const passwordGroup = document.getElementById('passwordGroup');
-        const confirmPasswordGroup = document.getElementById('confirmPasswordGroup');
-        const termsGroup = document.getElementById('termsGroup');
+        // Salvando dados no localStorage
+        const saveFormData = () => {
+            localStorage.setItem('firstName', firstName.value);
+            localStorage.setItem('lastName', lastName.value);
+            localStorage.setItem('email', email.value);
+            localStorage.setItem('phone', phone.value);
+            localStorage.setItem('userType', userType.value);
+        };
 
-        // Password strength
-        const passwordStrength = document.getElementById('passwordStrength');
-        const strengthFill = document.getElementById('strengthFill');
-        const strengthText = document.getElementById('strengthText');
-
-        // Validações
-        function validateName(name) {
-            return name.trim().length >= 2;
-        }
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        function validatePhone(phone) {
-            const cleaned = phone.replace(/\D/g, '');
-            return cleaned.length >= 10;
-        }
-
-        function validatePassword(password) {
-            return password.length >= 8;
-        }
-
-        function calculatePasswordStrength(password) {
-            let strength = 0;
-            
-            if (password.length >= 8) strength++;
-            if (password.length >= 12) strength++;
-            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
-            if (/\d/.test(password)) strength++;
-            if (/[^a-zA-Z0-9]/.test(password)) strength++;
-
-            if (strength <= 2) return 'weak';
-            if (strength <= 4) return 'medium';
-            return 'strong';
-        }
-
-        function showError(group, show) {
-            if (show) {
-                group.classList.add('has-error');
-                group.classList.remove('has-success');
-            } else {
-                group.classList.remove('has-error');
-                group.classList.add('has-success');
+        // Preenchendo os campos com dados do localStorage
+        window.onload = () => {
+            if (localStorage.getItem('firstName')) {
+                firstName.value = localStorage.getItem('firstName');
             }
-        }
-
-        function showAlert(type, message) {
-            alertError.classList.remove('show');
-            alertSuccess.classList.remove('show');
-            
-            if (type === 'error') {
-                alertError.textContent = message;
-                alertError.classList.add('show');
-            } else {
-                alertSuccess.textContent = message;
-                alertSuccess.classList.add('show');
+            if (localStorage.getItem('lastName')) {
+                lastName.value = localStorage.getItem('lastName');
             }
-
-            setTimeout(() => {
-                alertError.classList.remove('show');
-                alertSuccess.classList.remove('show');
-            }, 5000);
-        }
-
-        // Máscara de telefone
-        phone.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length <= 11) {
-                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
-                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+            if (localStorage.getItem('email')) {
+                email.value = localStorage.getItem('email');
             }
-            
-            e.target.value = value;
-        });
-
-        // Validação em tempo real
-        firstName.addEventListener('input', () => {
-            if (firstName.value.length > 0) {
-                showError(firstNameGroup, !validateName(firstName.value));
-            } else {
-                firstNameGroup.classList.remove('has-error', 'has-success');
+            if (localStorage.getItem('phone')) {
+                phone.value = localStorage.getItem('phone');
             }
-        });
-
-        lastName.addEventListener('input', () => {
-            if (lastName.value.length > 0) {
-                showError(lastNameGroup, !validateName(lastName.value));
-            } else {
-                lastNameGroup.classList.remove('has-error', 'has-success');
+            if (localStorage.getItem('userType')) {
+                userType.value = localStorage.getItem('userType');
             }
-        });
-
-        email.addEventListener('input', () => {
-            if (email.value.length > 0) {
-                showError(emailGroup, !validateEmail(email.value));
-            } else {
-                emailGroup.classList.remove('has-error', 'has-success');
-            }
-        });
-
-        phone.addEventListener('input', () => {
-            if (phone.value.length > 0) {
-                showError(phoneGroup, !validatePhone(phone.value));
-            } else {
-                phoneGroup.classList.remove('has-error', 'has-success');
-            }
-        });
-
-        userType.addEventListener('change', () => {
-            showError(userTypeGroup, userType.value === '');
-        });
-
-        password.addEventListener('input', () => {
-            const value = password.value;
-            
-            if (value.length > 0) {
-                passwordStrength.classList.add('show');
-                
-                const strength = calculatePasswordStrength(value);
-                strengthFill.className = 'strength-fill ' + strength;
-                strengthText.className = 'strength-text ' + strength;
-                
-                if (strength === 'weak') {
-                    strengthText.textContent = 'Senha fraca';
-                } else if (strength === 'medium') {
-                    strengthText.textContent = 'Senha média';
-                } else {
-                    strengthText.textContent = 'Senha forte';
-                }
-                
-                showError(passwordGroup, !validatePassword(value));
-            } else {
-                passwordStrength.classList.remove('show');
-                passwordGroup.classList.remove('has-error', 'has-success');
-            }
-
-            // Validar confirmação se já foi preenchida
-            if (confirmPassword.value.length > 0) {
-                showError(confirmPasswordGroup, value !== confirmPassword.value);
-            }
-        });
-
-        confirmPassword.addEventListener('input', () => {
-            if (confirmPassword.value.length > 0) {
-                showError(confirmPasswordGroup, password.value !== confirmPassword.value);
-            } else {
-                confirmPasswordGroup.classList.remove('has-error', 'has-success');
-            }
-        });
+        };
 
         // Submit do formulário
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             // Validar todos os campos
-            const isFirstNameValid = validateName(firstName.value);
-            const isLastNameValid = validateName(lastName.value);
-            const isEmailValid = validateEmail(email.value);
-            const isPhoneValid = validatePhone(phone.value);
+            const isFirstNameValid = firstName.value.trim().length >= 2;
+            const isLastNameValid = lastName.value.trim().length >= 2;
+            const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+            const isPhoneValid = phone.value.replace(/\D/g, '').length >= 10;
             const isUserTypeValid = userType.value !== '';
-            const isPasswordValid = validatePassword(password.value);
+            const isPasswordValid = password.value.length >= 8;
             const isConfirmPasswordValid = password.value === confirmPassword.value;
             const isTermsAccepted = terms.checked;
 
-            showError(firstNameGroup, !isFirstNameValid);
-            showError(lastNameGroup, !isLastNameValid);
-            showError(emailGroup, !isEmailValid);
-            showError(phoneGroup, !isPhoneValid);
-            showError(userTypeGroup, !isUserTypeValid);
-            showError(passwordGroup, !isPasswordValid);
-            showError(confirmPasswordGroup, !isConfirmPasswordValid);
-
-            if (!isTermsAccepted) {
-                termsGroup.classList.add('has-error');
-                setTimeout(() => termsGroup.classList.remove('has-error'), 500);
-            }
-
             if (!isFirstNameValid || !isLastNameValid || !isEmailValid || !isPhoneValid || 
                 !isUserTypeValid || !isPasswordValid || !isConfirmPasswordValid || !isTermsAccepted) {
-                showAlert('error', 'Por favor, corrija os erros no formulário.');
+                alert("Por favor, corrija os erros no formulário.");
                 return;
             }
 
-            // Simular loading
-            btnSignup.classList.add('loading');
-            btnSignup.textContent = '';
+            // Salvar dados no localStorage
+            saveFormData();
 
-            // Simular chamada API
-            setTimeout(() => {
-                btnSignup.classList.remove('loading');
-                btnSignup.textContent = 'Criar Conta';
-
-                // Simular sucesso
-                showAlert('success', 'Conta criada com sucesso! Redirecionando...');
-                
-                setTimeout(() => {
-                    // Redirecionar para login ou dashboard
-                    console.log('Conta criada:', {
-                        firstName: firstName.value,
-                        lastName: lastName.value,
-                        email: email.value,
-                        phone: phone.value,
-                        userType: userType.value
-                    });
-                }, 2000);
-            }, 2000);
-        });
-
-        // Botões de cadastro social
-        document.getElementById('btnGoogle').addEventListener('click', () => {
-            showAlert('success', 'Redirecionando para cadastro com Google...');
-        });
-
-        document.getElementById('btnFacebook').addEventListener('click', () => {
-            showAlert('success', 'Redirecionando para cadastro com Facebook...');
-        });
-
-        // Link "Fazer login"
-        document.querySelector('.login-link a').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.location.href = 'login.html';
+            // Simular sucesso
+            alert("Conta criada com sucesso!");
+            window.location.href = '/home-pag/home-pag.html';
         });
     </script>
 </body>
